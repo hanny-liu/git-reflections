@@ -19,6 +19,42 @@ nothing added to commit but untracked files present (use "git add" to track)//�
 5.初始化版本库时会发生什么情况？为什么你需要这样做？
 初始化版本库用git init，然后终端会显示：Initialized empty Git repository in /home/lhw/version-control/reflections/.git/表明创建了一个空的git仓库，因为目前没有文件提交commit
 
+6.git add命令将文件添加到存储区域。
+当运行git add lesson_2_reflections.txt 和git add lesson_1_reflections.txt 后，再运行git status时，命令行会显示：
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   lesson_1_reflections.txt
+	new file:   lesson_2_reflections.txt
+可以看出已经有待提交更改的文件
+
+7.概念图：初始化、添加、暂存区
+自我们上次再次查看概念图以来，我们引入了一些新概念。
+
+git init （git 初始化）
+git add （git 添加）//git add某个文件后该文件会被保存到暂存区，当执行git commit后文件才会被保存到仓库里
+git status （git 状态）
+staging area （暂存区）
+working directory （工作目录）
+
+8.暂存区与工作目录和版本库有何不同？你认为它具有什么价值？
+？？
+
+9.当已经提交过的文件，再更改了一次，然后运行git status后终端显示：
+On branch master
+Changes not staged for commit://这里表示更改的文件还没有放在暂存区
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   lesson_2_reflections.txt//说明之前提交的文件被修改
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
 
 
 
