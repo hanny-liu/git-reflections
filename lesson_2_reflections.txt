@@ -1,0 +1,24 @@
+1.ls -a可以显示当前目录下的隐藏文件
+2.不需要联网就可以创建仓库或添加commit
+3.初始化git仓库：
+  运行git init就是初始化或创建新的git仓库。
+4.创建完一个git仓库后commit的数量肯定是0，如果此时用git log显示仓库提交次数，肯定会报错：fatal: your current branch 'master' does not have any commits yet
+5.git status是可以看到最后提交commit后又更改了的文件：
+终端显示的内容：
+On branch master//显示目前在主分支上
+
+Initial commit//表示此次是初始commit
+
+Untracked files://显示未跟踪的文件
+  (use "git add <file>..." to include in what will be committed)
+
+	lesson_1_reflections.txt
+	lesson_2_reflections .txt
+
+nothing added to commit but untracked files present (use "git add" to track)//表示目前没有任何文件加入到commit中。
+5.初始化版本库时会发生什么情况？为什么你需要这样做？
+初始化版本库用git init，然后终端会显示：Initialized empty Git repository in /home/lhw/version-control/reflections/.git/表明创建了一个空的git仓库，因为目前没有文件提交commit
+
+
+
+
