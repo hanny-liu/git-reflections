@@ -25,3 +25,17 @@ reflections	https://github.com/hanny-liu/git-reflections.git (push)//将向其�
 9.说明Fork、克隆和分支之间的不同。何时使用某种功能而不是另一种？
 fork用在github仓库之间的克隆。而克隆是远程仓库和本地仓库的操作。分支是本地仓库的操作。
 
+10.如何将远程仓库与本地仓库文件合并？
+当你git clone一个仓库到本地时，git会将所有远程分支都在本地保存一个副本，名字叫origin/master，origin/...,origin/...,...
+如果你在克隆下来的本地仓库里更新文件并提交到远程仓库内，这时，副本就和本地仓库状态一致。
+如果你在远程仓库更新了一个版本，同时在本地仓库也更新了一个版本。如何合并呢？
+此时你可以先用git fetch把远程仓库在本地仓库下的副本更新成远程仓库的最新状态，然后再将副本和本地仓库的版本进行merge，这样就可以合并文件了。
+所以git pull origin master= git fetch origin + git merge master origin/master
+11.那么pull是否就完全等同于fetch + merge呢？
+pull相当于一种快进合并，就相当于有现在远程库的版本是本地库版本的最新版本，本地库版本是远程库的父版本，这样就可以直接合并到本地库，把远程库当做子版本！
+
+12.若在新的分支更改文件然后push到远程仓库中的话，命令为：git push +远程仓库名 +分支名
+13.如果将本地其他分支的文件push到fork仓库中，需要创建pull request,来合并主分支和子分支的文件，流程如下：
+push 子分支的文件到你的远程库内，然后创建一个pull request从子分支到主分支。（github上有图标）
+14.如果其他人对文件的更改与你的pull请求有冲突时会发生什么问题？
+
