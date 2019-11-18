@@ -168,5 +168,11 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 20. git log -n 1只显示最近一次的提交记录
 
+21.git删除提交
+$ git --help                            # 帮助命令
+$ git pull origin master                # 将远程仓库里面的项目拉下来
+$ dir                                   # 查看有哪些文件夹
+$ git rm -r --cached .idea              # 删除.idea文件夹
+$ git commit -m '删除.idea'              # 提交,添加操作说明
 
 
