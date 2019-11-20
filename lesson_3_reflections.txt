@@ -1,0 +1,41 @@
+1.设置github的密码缓存：
+每次通过命令行向 GitHub 发送更改时，都需要键入密码，以证明你有权修改版本库。这可能很快会让人觉得厌烦，因此，许多人都喜欢设置密码缓存，此功能让你只需键入密码一次，以后就会自动在该计算机上填写密码。该命令为：
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=3600'
+
+2.要使版本库保持同步，github提出远程仓库，新建一个远程仓库，然后向其发送文件。用push发送文件到远程仓库，也可以pull文件下载到本地仓库。如果只push某个分支的文件，则远程仓库将只接受此分支的文件，如果远程仓库中已经有了分支中的某些文件，它将不再上传到仓库里，只把未上传的文件push进去。
+
+3.查看远程仓库命令：git remote 
+  添加远程仓库命令：git remote add +远程仓库名 +远程仓库URL 这里的远程仓库名是我自己定义的来指代远程仓库名的。如果你只有一个远程仓库可以直接命名为origin
+  查看是否远程仓库添加成功：git remote -v表示git remote信息会输出更多，终端输出：
+reflections	https://github.com/hanny-liu/git-reflections.git (fetch)//显示将从中获取数据的URL
+reflections	https://github.com/hanny-liu/git-reflections.git (push)//将向其中推送数据的URL
+
+4.向远程仓库发送更改的命令：git push +远程仓库名 +想push文件的分支，默认地，远程的仓库的分支也是master
+5.何时你会想使用远程版本库，而不是将所有工作保存在本地？
+ 一般是做文件备份会将文件都上传到远程仓库；或者是与其他合作者一起协作完成代码；或者想加入某个远程项目中做开发。
+
+6.当github中的远程仓库创建了一个新的文件，如何使得远程仓库与本地仓库的版本统一？
+此时需要用git pull命令将远程仓库拉回到本地仓库中，与git push一样，git pull +远程仓库名 +分支名
+
+7.forking版本库：可以直接在github上用forking一个现有的库就可以出现在你自己的账户下。即在github账户上将一个仓库克隆到另一个账户上叫fork
+
+8.当你克隆一个仓库时，git会自动设置一个远程仓库，并指向你克隆的原始仓库。
+
+9.说明Fork、克隆和分支之间的不同。何时使用某种功能而不是另一种？
+fork用在github仓库之间的克隆。而克隆是远程仓库和本地仓库的操作。分支是本地仓库的操作。
+
+10.如何将远程仓库与本地仓库文件合并？
+当你git clone一个仓库到本地时，git会将所有远程分支都在本地保存一个副本，名字叫origin/master，origin/...,origin/...,...
+如果你在克隆下来的本地仓库里更新文件并提交到远程仓库内，这时，副本就和本地仓库状态一致。
+如果你在远程仓库更新了一个版本，同时在本地仓库也更新了一个版本。如何合并呢？
+此时你可以先用git fetch把远程仓库在本地仓库下的副本更新成远程仓库的最新状态，然后再将副本和本地仓库的版本进行merge，这样就可以合并文件了。
+所以git pull origin master= git fetch origin + git merge master origin/master
+11.那么pull是否就完全等同于fetch + merge呢？
+pull相当于一种快进合并，就相当于有现在远程库的版本是本地库版本的最新版本，本地库版本是远程库的父版本，这样就可以直接合并到本地库，把远程库当做子版本！
+
+12.若在新的分支更改文件然后push到远程仓库中的话，命令为：git push +远程仓库名 +分支名
+13.如果将本地其他分支的文件push到fork仓库中，需要创建pull request,来合并主分支和子分支的文件，流程如下：
+push 子分支的文件到你的远程库内，然后创建一个pull request从子分支到主分支。（github上有图标）
+14.如果其他人对文件的更改与你的pull请求有冲突时会发生什么问题？
+
