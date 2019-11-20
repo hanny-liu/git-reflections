@@ -22,6 +22,154 @@ nothing added to commit but untracked files present (use "git add" to track)//�
 6.git add命令将文件添加到存储区域。
 当运行git add lesson_2_reflections.txt 和git add lesson_1_reflections.txt 后，再运行git status时，命令行会显示：
 On branch master
+<<<<<<< HEAD
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   lesson_1_reflections.txt
+	new file:   lesson_2_reflections.txt
+可以看出已经有待提交更改的文件
+
+7.概念图：初始化、添加、暂存区
+自我们上次再次查看概念图以来，我们引入了一些新概念。
+
+git init （git 初始化）
+git add （git 添加）//git add某个文件后该文件会被保存到暂存区，当执行git commit后文件才会被保存到仓库里
+git status （git 状态）
+staging area （暂存区）
+working directory （工作目录）
+
+8.暂存区与工作目录和版本库有何不同？你认为它具有什么价值？
+？？
+
+9.当已经提交过的文件，再更改了一次，然后运行git status后终端显示：
+On branch master
+Changes not staged for commit://这里表示更改的文件还没有放在暂存区
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   lesson_2_reflections.txt//说明之前提交的文件被修改
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+然后再用git commit提交新的更改文件，这样再用git log终端就会显示commit的两次的文件：
+commit 4978e7e09b36a04dad079522dcee28f2b3741b4a
+Author: hanny-liu <1299250637@qq.com>
+Date:   Sat Aug 24 22:23:34 2019 +0800
+
+    add more question,using git diff
+
+commit d03ce621453a2e17bf52be7a799c57ea107cbae8
+Author: hanny-liu <1299250637@qq.com>
+Date:   Sat Aug 24 22:03:04 2019 +0800
+
+    I LOVE CHINA!
+因此，如果我想看看之前的文件，直接用 git checkout d03ce621453a2e17bf52be7a799c57ea107cbae8就能替换到之前的版本！！！很方便！！！
+
+10.git checkout master可以从游离状态转换到主分支，也可从主分支检出子分支，也可从子分支检出主分支
+11.每创建一个git仓库，git就会自动创建一个主分支master
+12.利用git branch可以创建和查看分支
+查看分支：git branch
+创建分支easy-mode：git branch easy-mode
+切换分支：git checkout easy-mode
+13.如何在分支下操作文件？
+需要明确的一点是，当在某时创建分支后，分支内有某时的master内的所有文件，所以你可以切换到分支后修改该文件，进行进一步开发。
+14.如果你想运行你在分支上更改的文件，你就需要先切换分支，然后在把分支上的文件checkout出来就能运行啦～～～
+15.git log是可以查看每一次commit的记录，但是如果有多个分支用git log是查看的哪一个分支的commit记录呢？
+git log以当前的分支或当前的commit作为最新的commit起点，所以，也就是你当前处于哪个分支就显示哪个分支的commit的记录
+17.利用git log --graph --oneline （master coins easy-mode）可以显示当前仓库各个分支总的commit树，内容如下：
+* 562a587 just want to see branch
+| * 5b61f75 add easy-mode
+| * 9636e1b change 3 pieces into 2
+|/  
+* 3884eab Add color
+* 3e42136 now using requestAnimationFrame
+* 4035769 frame interval was set wrong after game was paused
+* 25ede83 a couple missing ends with the ipad version
+* df03538 I can't spell 'screen' apparently :)
+| * 354dfdd Make ships able to spawn on coins
+| * 0c6daf1 Make it possible to collect coins
+| * a3c0ae4 Create helper functions
+| * 656b02e First pass at adding coins
+|/  
+* b0678b1 Revert controls
+* f19cb1b Fix typo in space
+* 75928a9 Use space for movement and enter for shooting
+* ac83b72 mostly finished ipad version
+* 7ca4826 trying to get div touch controls to work
+* 3cb406e first pass at ipad controls
+* fe7993e now capturing down key so people don't accidently scroll the page
+* 343935f added license
+* 80f3bc7 increased canvas size
+
+16.合并分支
+git merge 还将在合并的版本中包含当前检出的分支。因此，如果检出了 branch1，并且运行 git merge branch2 branch3，则合并的版本会将 branch1 以及 branch2 和 branch3 组合起来。由于在你进行合并提交后 branch1 标签将会更新，因此，你不想将 branch1 中的更改包含在合并中是不可能的。有鉴于此，在合并之前应始终检出你打算合并的两个分支之一。应检出哪个分支取决于你想让哪个分支标签指向新的提交。
+
+由于检出的分支始终包含在合并中，因此，你可能已猜到，在合并两个分支时，无需在命令行上将两者都指定为 git merge 的参数。如果想将 branch2 合并到 branch1 中，只需键入 git checkout branch1，然后键入 git merge branch2 即可。键入 git merge branch1 branch2 的唯一原因是，它能帮助你对要合并的分支更加心中有数。
+
+另外，由于是合并两个分支，因此在命令行中按何顺序键入分支并不重要。关键是要记住，git merge 始终将所有指定的分支合并到当前检出的分支中，并为该分支新建一个提交。
+
+合并冲突
+如果收到类似以下所示的消息：
+
+Auto-merging game.js
+CONFLICT (content): Merge conflict in game.js
+Automatic merge failed; fix conflicts and then commit the result.
+这表示在你开始合并时，文件的状态不同于 Caroline 的文件状态。要修复此问题，请完成以下步骤：
+
+运行 git merge --abort，将文件恢复到你开始合并之前的状态
+仔细检查文件的状态。如果在检出 master 分支时运行 git log，则应看到 Caroline 的“Add color”提交是第二新的提交，而最新的提交应为你修复 bullet 错误的提交。如果使用 git diff 将你的提交与 Caroline 的提交进行对比，你的提交应在第 424 行引入 this.delayBeforeBullet = 10; 这行代码。应仅使用空格（无制表符）使该行的缩进程度与其下面一行相同，而且该行之后应无空格。
+在文件处于正确的状态后，利用你所做的更改新建一个提交。
+重新尝试合并。
+
+17.git show+commit id可以显示提交的文件与父提交的区别而不是合并后两个文件的区别，这样会发现修改很多
+18.合并完成后，可以用git branch -d +分支名删掉分支，-d是必须得合并之后才能删除。若要直接删除需要用-D选项。
+19.解决合并冲突：
+两个版本中同时更改了同一行，在合并的时候，git无法得知应该如何更改，所以报错：
+Auto-merging game.js
+CONFLICT (content): Merge conflict in game.js
+Automatic merge failed; fix conflicts and then commit the result.
+可以打开冲突文件中看到有三部分
+<<<<<<< HEAD开始的为自己的代码
+.....
+....
+|||||||| merged common ancestors
+.....
+....
+====
+.....
+...
+>>>>>>> master为主分支的代码
+
+比如：
+<<<<<<< HEAD
+        for (var i = 0; i < this.bullets.length; i++) {
+          if (!this.bullets[i].visible) {
+            SFX.laser();
+            var bullet = this.bullets[i];
+            var rad = ((this.rot-90) * Math.PI)/180;
+            var vectorx = Math.cos(rad);
+            var vectory = Math.sin(rad);
+            // move to the nose of the ship
+            bullet.x = this.x + vectorx * 4;
+            bullet.y = this.y + vectory * 4;
+            bullet.vel.x = 6 * vectorx + this.vel.x;
+            bullet.vel.y = 6 * vectory + this.vel.y;
+            bullet.visible = true;
+            break;
+          }
+        }
+=======
+        this.delayBeforeBullet = 10;
+        this.shoot();
+>>>>>>> coins
+
+20. git log -n 1只显示最近一次的提交记录
+=======
+>>>>>>> 2385701e9c2716ea61076899dc16864223bbe4da
 
 Initial commit
 
@@ -168,5 +316,11 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 20. git log -n 1只显示最近一次的提交记录
 
+21.git删除提交
+$ git --help                            # 帮助命令
+$ git pull origin master                # 将远程仓库里面的项目拉下来
+$ dir                                   # 查看有哪些文件夹
+$ git rm -r --cached .idea              # 删除.idea文件夹
+$ git commit -m '删除.idea'              # 提交,添加操作说明
 
 
